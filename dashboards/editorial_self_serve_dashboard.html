@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Editorial &amp; Audience Self-Serve BI Scorecard</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; margin: 28px; color: #1f2933; background: #f8fafc; }
+  h1 { color: #173B55; margin-bottom: 4px; }
+  .sub { color: #52606d; margin-bottom: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(4, minmax(160px, 1fr)); gap: 14px; margin-bottom: 22px; }
+  .card { background: #fff; border: 1px solid #d9e2ec; border-radius: 8px; padding: 14px; }
+  .kpi-val { font-size: 24px; font-weight: 700; color: #173B55; }
+  .kpi-lbl { font-size: 12px; color: #616e7c; text-transform: uppercase; letter-spacing: 0.4px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; margin-bottom: 24px; border: 1px solid #d9e2ec; }
+  th, td { padding: 9px 12px; border-bottom: 1px solid #e4e7eb; text-align: left; font-size: 13px; }
+  th { background: #173B55; color: #fff; }
+  select { padding: 6px 10px; border: 1px solid #cbd2d9; border-radius: 6px; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<h1>Editorial &amp; Audience Self-Serve BI Scorecard</h1>
+<div class="sub">SQL &amp; dbt Warehouse Summary across 103,644 Verified Records (14/14 DQ Gates Passed)</div>
+<div class="grid">
+  <div class="card"><div class="kpi-val">39,644</div><div class="kpi-lbl">Staged Articles</div></div>
+  <div class="card"><div class="kpi-val">298</div><div class="kpi-lbl">2-Sigma Spike Desk-Days</div></div>
+  <div class="card"><div class="kpi-val">1,181</div><div class="kpi-lbl">Parser Zero-Body Defects</div></div>
+  <div class="card"><div class="kpi-val">6,134</div><div class="kpi-lbl">Unassigned Desk Rows</div></div>
+</div>
+<label for="deskFilter"><strong>Filter Desk:</strong></label>
+<select id="deskFilter" onchange="renderDeskTable()">
+  <option value="ALL">All Editorial Desks</option>
+</select>
+<table>
+  <thead>
+    <tr><th>Editorial Desk</th><th>Articles</th><th>Total Shares</th><th>Mean Shares</th><th>High-Velocity %</th><th>2-Sigma Spikes</th><th>Zero-Body Defects</th></tr>
+  </thead>
+  <tbody id="deskBody"></tbody>
+</table>
+<h2>Randomized Newsletter A/B Experiment Contrasts</h2>
+<table>
+  <thead>
+    <tr><th>Contrast</th><th>Treatment N</th><th>Visit Rate %</th><th>Visit Lift (Rel)</th><th>Holm p (Visit)</th><th>Conv Lift (Rel)</th><th>Holm p (Conv)</th></tr>
+  </thead>
+  <tbody id="abBody"></tbody>
+</table>
+<script>
+const deskData = [{"editorial_desk": "Unassigned", "articles": 6134, "total_shares": 36467793, "avg_shares": 5945.19, "high_velocity_rate_pct": 33.84, "spike_days": 41, "zero_body_defects": 643, "unassigned_rows": 6134}, {"editorial_desk": "Tech", "articles": 7346, "total_shares": 22568993, "avg_shares": 3072.28, "high_velocity_rate_pct": 21.86, "spike_days": 41, "zero_body_defects": 21, "unassigned_rows": 0}, {"editorial_desk": "Entertainment", "articles": 7057, "total_shares": 20962727, "avg_shares": 2970.49, "high_velocity_rate_pct": 16.41, "spike_days": 43, "zero_body_defects": 201, "unassigned_rows": 0}, {"editorial_desk": "World", "articles": 8427, "total_shares": 19278735, "avg_shares": 2287.73, "high_velocity_rate_pct": 11.8, "spike_days": 45, "zero_body_defects": 259, "unassigned_rows": 0}, {"editorial_desk": "Business", "articles": 6258, "total_shares": 19168370, "avg_shares": 3063.02, "high_velocity_rate_pct": 16.7, "spike_days": 41, "zero_body_defects": 23, "unassigned_rows": 0}, {"editorial_desk": "Social Media", "articles": 2323, "total_shares": 8431057, "avg_shares": 3629.38, "high_velocity_rate_pct": 29.62, "spike_days": 44, "zero_body_defects": 12, "unassigned_rows": 0}, {"editorial_desk": "Lifestyle", "articles": 2099, "total_shares": 7728777, "avg_shares": 3682.12, "high_velocity_rate_pct": 24.39, "spike_days": 43, "zero_body_defects": 22, "unassigned_rows": 0}];
+const abData = [{"contrast": "Mens E-Mail vs No E-Mail", "treatment_n": 21307, "control_n": 21306, "treatment_visit_rate_pct": 18.2757, "control_visit_rate_pct": 10.6167, "visit_abs_lift_pp": 7.659, "visit_rel_lift_pct": 72.14, "visit_newcombe_95ci_pp": [6.9953, 8.3227], "visit_z": 22.486, "visit_p_raw": 5.685165e-112, "treatment_conv_rate_pct": 1.2531, "control_conv_rate_pct": 0.5726, "conv_abs_lift_pp": 0.6805, "conv_rel_lift_pct": 118.84, "conv_newcombe_95ci_pp": [0.5014, 0.8641], "conv_z": 7.3851, "conv_p_raw": 1.523224e-13, "smd_history": 0.0076, "recency_diff": 0.0239, "visit_p_holm": 1.70555e-111, "conv_p_holm": 4.569671e-13}, {"contrast": "Womens E-Mail vs No E-Mail", "treatment_n": 21387, "control_n": 21306, "treatment_visit_rate_pct": 15.14, "control_visit_rate_pct": 10.6167, "visit_abs_lift_pp": 4.5233, "visit_rel_lift_pct": 42.61, "visit_newcombe_95ci_pp": [3.8894, 5.1574], "visit_z": 13.9492, "visit_p_raw": 3.182403e-44, "treatment_conv_rate_pct": 0.8837, "control_conv_rate_pct": 0.5726, "conv_abs_lift_pp": 0.3111, "conv_rel_lift_pct": 54.33, "conv_newcombe_95ci_pp": [0.1502, 0.4745], "conv_z": 3.7796, "conv_p_raw": 0.0001571051, "smd_history": 0.0065, "recency_diff": 0.0182, "visit_p_holm": 3.182403e-44, "conv_p_holm": 0.0001571051}, {"contrast": "Combined Newsletter vs No E-Mail", "treatment_n": 42694, "control_n": 21306, "treatment_visit_rate_pct": 16.7049, "control_visit_rate_pct": 10.6167, "visit_abs_lift_pp": 6.0882, "visit_rel_lift_pct": 57.35, "visit_newcombe_95ci_pp": [5.5404, 6.6291], "visit_z": 20.5101, "visit_p_raw": 1.749787e-93, "treatment_conv_rate_pct": 1.0681, "control_conv_rate_pct": 0.5726, "conv_abs_lift_pp": 0.4955, "conv_rel_lift_pct": 86.53, "conv_newcombe_95ci_pp": [0.3508, 0.6333], "conv_z": 6.2438, "conv_p_raw": 4.271614e-10, "smd_history": 0.0071, "recency_diff": 0.021, "visit_p_holm": 3.499574e-93, "conv_p_holm": 8.543228e-10}];
+const sel = document.getElementById('deskFilter');
+deskData.forEach(r => {
+  const o = document.createElement('option');
+  o.value = r.editorial_desk;
+  o.textContent = r.editorial_desk;
+  sel.appendChild(o);
+});
+function renderDeskTable() {
+  const val = sel.value;
+  const rows = val === 'ALL' ? deskData : deskData.filter(r => r.editorial_desk === val);
+  document.getElementById('deskBody').innerHTML = rows.map(r => `
+    <tr>
+      <td><strong>${r.editorial_desk}</strong></td>
+      <td>${Number(r.articles).toLocaleString()}</td>
+      <td>${Number(r.total_shares).toLocaleString()}</td>
+      <td>${r.avg_shares}</td>
+      <td>${r.high_velocity_rate_pct}%</td>
+      <td>${r.spike_days}</td>
+      <td>${Number(r.zero_body_defects).toLocaleString()}</td>
+    </tr>`).join('');
+}
+document.getElementById('abBody').innerHTML = abData.map(r => `
+  <tr>
+    <td><strong>${r.contrast}</strong></td>
+    <td>${Number(r.treatment_n).toLocaleString()}</td>
+    <td>${r.treatment_visit_rate_pct}%</td>
+    <td>+${r.visit_rel_lift_pct}%</td>
+    <td>${r.visit_p_holm}</td>
+    <td>+${r.conv_rel_lift_pct}%</td>
+    <td>${r.conv_p_holm}</td>
+  </tr>`).join('');
+renderDeskTable();
+</script>
+</body>
+</html>

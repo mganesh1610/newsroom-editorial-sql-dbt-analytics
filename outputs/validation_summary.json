@@ -1,0 +1,226 @@
+{
+  "editorial_articles": 39644,
+  "newsletter_assignments": 64000,
+  "total_combined_records": 103644,
+  "distinct_publication_days": 724,
+  "zero_body_parser_defects": 1181,
+  "unassigned_taxonomy_rows": 6134,
+  "traffic_spike_days_2sigma": 298,
+  "dq_gates_passed": 14,
+  "dq_gates_total": 14,
+  "dq_gates": [
+    {
+      "gate_id": "DQ01_raw_to_staging_conservation",
+      "passed": true,
+      "observed": 39644,
+      "expected": 39644
+    },
+    {
+      "gate_id": "DQ02_unique_article_url",
+      "passed": true,
+      "observed": 39644,
+      "expected": 39644
+    },
+    {
+      "gate_id": "DQ03_positive_share_counts",
+      "passed": true,
+      "observed": 0,
+      "expected": 0
+    },
+    {
+      "gate_id": "DQ04_mutually_exclusive_desk_flags",
+      "passed": true,
+      "observed": 0,
+      "expected": 0
+    },
+    {
+      "gate_id": "DQ05_single_weekday_flag_invariant",
+      "passed": true,
+      "observed": 0,
+      "expected": 0
+    },
+    {
+      "gate_id": "DQ06_zero_body_parser_defect_isolated",
+      "passed": true,
+      "observed": 1181,
+      "expected": "Flagged isolated subset"
+    },
+    {
+      "gate_id": "DQ07_unassigned_taxonomy_isolated",
+      "passed": true,
+      "observed": 6134,
+      "expected": "Flagged isolated subset"
+    },
+    {
+      "gate_id": "DQ08_mart_article_conservation",
+      "passed": true,
+      "observed": 39644,
+      "expected": 39644
+    },
+    {
+      "gate_id": "DQ09_mart_total_shares_parity",
+      "passed": true,
+      "observed": 134606452,
+      "expected": 134606452
+    },
+    {
+      "gate_id": "DQ10_pub_day_sequence_non_negative",
+      "passed": true,
+      "observed": [
+        0,
+        723
+      ],
+      "expected": "Non-negative ordered horizon"
+    },
+    {
+      "gate_id": "DQ11_newsletter_row_conservation",
+      "passed": true,
+      "observed": 64000,
+      "expected": 64000
+    },
+    {
+      "gate_id": "DQ12_newsletter_outcome_domain_valid",
+      "passed": true,
+      "observed": 0,
+      "expected": 0
+    },
+    {
+      "gate_id": "DQ13_newsletter_srm_balance",
+      "passed": true,
+      "observed": 0.9037,
+      "expected": "> 0.01"
+    },
+    {
+      "gate_id": "DQ14_lookml_semantic_coverage",
+      "passed": true,
+      "observed": 10,
+      "expected": 10
+    }
+  ],
+  "dataset_sha256": {
+    "online_news_popularity_zip": "dba2ae526f62ccef6f2f8efb53b0268319f4d0d2719bb98d88958cfe31d58a22",
+    "hillstrom_email_experiment_csv": "0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece"
+  },
+  "weekend_vs_weekday_welch": {
+    "weekend_articles": 5190,
+    "weekday_articles": 34454,
+    "weekend_mean_log1p": 7.7497,
+    "weekday_mean_log1p": 7.4344,
+    "weekend_geometric_mean_shares": 2319.86,
+    "weekday_geometric_mean_shares": 1692.27,
+    "welch_t_stat": 24.2141,
+    "p_value": 1.579729e-129
+  },
+  "ridge_engagement_drivers": {
+    "train_rows": 30770,
+    "test_rows": 7693,
+    "l2_lambda": 10.0,
+    "holdout_rmse": 0.8598,
+    "holdout_r2": 0.051,
+    "feature_betas": {
+      "title_word_count": -0.0222,
+      "body_word_count": 0.0325,
+      "image_count": 0.0373,
+      "video_count": 0.0171,
+      "internal_link_count": 0.0038,
+      "avg_keyword_share_velocity": 0.1879,
+      "title_subjectivity": 0.0286
+    }
+  },
+  "newsletter_ab_experiment": {
+    "total_assignments": 64000,
+    "srm_chi2": 0.2025,
+    "srm_p_value": 0.9037,
+    "srm_passed": true,
+    "contrasts": [
+      {
+        "contrast": "Mens E-Mail vs No E-Mail",
+        "treatment_n": 21307,
+        "control_n": 21306,
+        "treatment_visit_rate_pct": 18.2757,
+        "control_visit_rate_pct": 10.6167,
+        "visit_abs_lift_pp": 7.659,
+        "visit_rel_lift_pct": 72.14,
+        "visit_newcombe_95ci_pp": [
+          6.9953,
+          8.3227
+        ],
+        "visit_z": 22.486,
+        "visit_p_raw": 5.685165e-112,
+        "treatment_conv_rate_pct": 1.2531,
+        "control_conv_rate_pct": 0.5726,
+        "conv_abs_lift_pp": 0.6805,
+        "conv_rel_lift_pct": 118.84,
+        "conv_newcombe_95ci_pp": [
+          0.5014,
+          0.8641
+        ],
+        "conv_z": 7.3851,
+        "conv_p_raw": 1.523224e-13,
+        "smd_history": 0.0076,
+        "recency_diff": 0.0239,
+        "visit_p_holm": 1.70555e-111,
+        "conv_p_holm": 4.569671e-13
+      },
+      {
+        "contrast": "Womens E-Mail vs No E-Mail",
+        "treatment_n": 21387,
+        "control_n": 21306,
+        "treatment_visit_rate_pct": 15.14,
+        "control_visit_rate_pct": 10.6167,
+        "visit_abs_lift_pp": 4.5233,
+        "visit_rel_lift_pct": 42.61,
+        "visit_newcombe_95ci_pp": [
+          3.8894,
+          5.1574
+        ],
+        "visit_z": 13.9492,
+        "visit_p_raw": 3.182403e-44,
+        "treatment_conv_rate_pct": 0.8837,
+        "control_conv_rate_pct": 0.5726,
+        "conv_abs_lift_pp": 0.3111,
+        "conv_rel_lift_pct": 54.33,
+        "conv_newcombe_95ci_pp": [
+          0.1502,
+          0.4745
+        ],
+        "conv_z": 3.7796,
+        "conv_p_raw": 0.0001571051,
+        "smd_history": 0.0065,
+        "recency_diff": 0.0182,
+        "visit_p_holm": 3.182403e-44,
+        "conv_p_holm": 0.0001571051
+      },
+      {
+        "contrast": "Combined Newsletter vs No E-Mail",
+        "treatment_n": 42694,
+        "control_n": 21306,
+        "treatment_visit_rate_pct": 16.7049,
+        "control_visit_rate_pct": 10.6167,
+        "visit_abs_lift_pp": 6.0882,
+        "visit_rel_lift_pct": 57.35,
+        "visit_newcombe_95ci_pp": [
+          5.5404,
+          6.6291
+        ],
+        "visit_z": 20.5101,
+        "visit_p_raw": 1.749787e-93,
+        "treatment_conv_rate_pct": 1.0681,
+        "control_conv_rate_pct": 0.5726,
+        "conv_abs_lift_pp": 0.4955,
+        "conv_rel_lift_pct": 86.53,
+        "conv_newcombe_95ci_pp": [
+          0.3508,
+          0.6333
+        ],
+        "conv_z": 6.2438,
+        "conv_p_raw": 4.271614e-10,
+        "smd_history": 0.0071,
+        "recency_diff": 0.021,
+        "visit_p_holm": 3.499574e-93,
+        "conv_p_holm": 8.543228e-10
+      }
+    ]
+  },
+  "ai_sql_glossary_metrics_validated": 20
+}
