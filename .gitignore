@@ -1,6 +1,7 @@
 data/raw/
 *.zip
 *.csv
+!outputs/*.csv
 *.sqlite
 *.db
 __pycache__/
