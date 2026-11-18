@@ -1,0 +1,29 @@
+{
+  "monitored_articles": 39644,
+  "distinct_publication_days": 724,
+  "media_beats_tracked": 7,
+  "total_audience_shares": 134606452,
+  "breaking_spike_alerts_total": 298,
+  "tier1_immediate_flash_alerts": 71,
+  "tier2_priority_morning_clips": 112,
+  "tier3_daily_digest_alerts": 115,
+  "deliverables": [
+    "outputs/daily_media_clip_and_reporter_tracker.xlsx",
+    "outputs/morning_breaking_news_briefing_and_media_qa.docx",
+    "outputs/breaking_media_alert_queue.csv"
+  ],
+  "gates_passed": 10,
+  "gates_total": 10,
+  "gates": {
+    "M01_article_count_matches_root_39644": true,
+    "M02_share_count_matches_root_134606452": true,
+    "M03_spike_count_matches_root_298": true,
+    "M04_alert_tiers_partition_all_spikes": true,
+    "M05_tier1_flash_alerts_non_empty": true,
+    "M06_foreign_key_integrity_clean": true,
+    "M07_sqlite_integrity_ok": true,
+    "M08_xlsx_beat_roster_populated": true,
+    "M09_docx_briefing_reconciles_totals": true,
+    "M10_source_sha256_preserved": true
+  }
+}
